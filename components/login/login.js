@@ -1,3 +1,4 @@
+import { Box, Button, Heading, Input, Spinner } from "@chakra-ui/react";
 import { useState } from "react";
 import { useUserContext } from "../../libs/user-context";
 
@@ -23,27 +24,28 @@ const Login = () => {
   };
 
   return (
-    <div
-      style={{
-        display: "flex",
-        flexDirection: "column",
-        alignItems: "center",
-        justifyContent: "center",
-        gap: "4px",
-      }}
+    <Box
+      display={"flex"}
+      flexDirection={"column"}
+      alignItems={"center"}
+      justifyContent={"center"}
+      p={"1rem"}
+      boxShadow={"lg"}
+      gap={"1rem"}
     >
-      <input
+      <Heading fontSize={"xl"}>Login</Heading>
+      <Input
         type={"text"}
         placeholder={"Username"}
         onChange={(e) => setUsername(e.target.value)}
       />
-      <input
+      <Input
         type={"password"}
         placeholder={"Password"}
         onChange={(e) => setPassword(e.target.value)}
       />
-      <button onClick={handleLogin}>{loading ? "Loading..." : "Login"}</button>
-    </div>
+      <Button onClick={handleLogin}>{loading ? <Spinner /> : "Login"}</Button>
+    </Box>
   );
 };
 

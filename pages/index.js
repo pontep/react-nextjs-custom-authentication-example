@@ -3,6 +3,7 @@ import Image from "next/image";
 import Login from "../components/login/login";
 import { useUserContext } from "../libs/user-context";
 import styles from "../styles/Home.module.css";
+import { Center, Text } from "@chakra-ui/react";
 
 export default function Home() {
   const { user, login } = useUserContext();
@@ -21,16 +22,11 @@ export default function Home() {
         </h1>
 
         {!user && (
-          <div>
-            <p
-              style={{
-                textAlign: "center",
-              }}
-            >
-              Login
-            </p>
-            <Login />
-          </div>
+          <>
+            <Center p={"1rem"}>
+              <Login />
+            </Center>
+          </>
         )}
 
         <div className={styles.grid}>
