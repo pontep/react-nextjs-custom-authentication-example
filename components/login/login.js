@@ -1,4 +1,11 @@
-import { Box, Button, Heading, Input, Spinner } from "@chakra-ui/react";
+import {
+  Box,
+  Button,
+  Heading,
+  Input,
+  Spinner,
+  useToast,
+} from "@chakra-ui/react";
 import { useState } from "react";
 import { useUserContext } from "../../libs/user-context";
 
@@ -8,19 +15,29 @@ const Login = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
+  const toast = useToast();
 
   const handleLogin = (e) => {
     e.preventDefault();
     if (!username || !password) {
-      alert(`Please enter username and password`);
+      if (!toast.isActive("login-failed")) {
+        toast({
+          title: "Login Failed",
+          description: "Please enter username and password",
+          status: "error",
+          duration: 3000,
+          isClosable: true,
+          id: "login-failed",
+        });
+      }
+
       return;
     }
 
     setLoading(true);
-    setTimeout(() => {
-      login(username, password);
+    login(username, password).finally(() => {
       setLoading(false);
-    }, 618);
+    });
   };
 
   return (
